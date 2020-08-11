@@ -79,6 +79,9 @@ chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
 
 #remove my username with set username
 sed -i -e "s/setupuser/"${inuser}"/g" .zshrc
+sed -i -e "s/root/"${inuser}"/g" .zshrc
+sed -i -e "s/user/"${inuser}"/g" .zshrc
+
 echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
 
 git restore .zshrc >/dev/null 2>/dev/nul
