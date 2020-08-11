@@ -65,8 +65,7 @@ install snap
 
 snap install code --classic
 
-#remove my username with set username
-sed -i -e "s/setupuser/"${inuser}"/g" .zshrc
+
 
 #copy files to correct directories
 cp rssh.conf /etc/rssh.conf
@@ -78,6 +77,8 @@ echo -e "Copy Config Files: [\033[32m*\e[0m]OK"
 cp -r ~/.oh-my-zsh /home/${inuser}/
 chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
 
+#remove my username with set username
+sed -i -e "s/setupuser/"${inuser}"/g" .zshrc
 echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
 
 git restore .zshrc >/dev/null 2>/dev/nul
