@@ -7,7 +7,7 @@ function retryinstall
    echo -e "[\033[33m-\e[0m] Retrying..."
    DEBIAN_FRONTEND=noninteractive apt-get --fix-broken install -yq -o  Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" >/dev/null 2>/dev/nul
    DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -yq -o  Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" >/dev/null 2>/dev/nul
-   DEBIAN_FRONTEND=noninteractive apt-get install -yq -o  Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" $1 >/dev/null 2>/dev/null && echo -e "[\033[32m*\e[0m]OK" || echo -e "[\033[31m-\e[0m] FAILED"
+   DEBIAN_FRONTEND=noninteractive apt-get install -yq -o  Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" $1 >/dev/null 2>/dev/null && echo -e "[\033[32m*\e[0m]OK" || echo -e "[\033[31m-\e[0m] FAILED Exiting now... Check apt isn't running & try again"; exit 1
 }
 function install
 {
@@ -78,9 +78,9 @@ cp -r ~/.oh-my-zsh /home/${inuser}/
 chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
 
 #remove my username with set username
-sed -i -e "s/setupuser/"${inuser}"/g" .zshrc
-sed -i -e "s/root/"${inuser}"/g" .zshrc
-sed -i -e "s/user/"${inuser}"/g" .zshrc
+sed -i -e "s/setupuser/"${inuser}"/g" /home/"${inuser}"/zshrc
+sed -i -e "s/root/"${inuser}"/g" /home/"${inuser}"/.zshrc
+sed -i -e "s/user/"${inuser}"/g" /home/"${inuser}"/.zshrc
 
 echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
 
