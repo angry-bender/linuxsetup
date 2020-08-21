@@ -59,8 +59,6 @@ install vim
 install git
 install powerline
 
-
-
 #copy files to correct directories
 cp rssh.conf /etc/rssh.conf
 cp .vimrc /home/${inuser}/
