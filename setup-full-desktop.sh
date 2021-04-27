@@ -66,10 +66,16 @@ install snap
 install wireshark
 install gnome-tweak-tool
 install nmap
+install plank
+install chrome-gnome-shell
 
 snap install code --classic
 
-
+#GDM Background Changer
+echo "Getting GDM Background Changer"
+git clone https://github.com/thiggy01/gdm-background
+cd ./gdm-background/debs
+dpkg -i ubuntu*$(cat /etc/*-release | grep VERSION_ID | grep -Eo '[0-9][0-9].[0-9][0-9]')* >/dev/null 2>/dev/null && echo -e "[\033[32m*\e[0m] GDM Background OK" || echo -e "[\033[31m-\e[0m] FAILED try installing deb manually, is you're ubuntu supported? check $(pwd) for debs"
 
 #copy files to correct directories
 cp rssh.conf /etc/rssh.conf
