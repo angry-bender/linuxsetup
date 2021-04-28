@@ -62,6 +62,7 @@ install cowsay
 install fortune
 install terminator
 install snap
+install locate
 
 snap install code --classic
 

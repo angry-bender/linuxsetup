@@ -58,6 +58,7 @@ echo -e "${inuser} shell: changed to zsh [\033[32m*\e[0m]OK"
 install vim
 install git
 install powerline
+install locate
 
 #copy files to correct directories
 cp rssh.conf /etc/rssh.conf

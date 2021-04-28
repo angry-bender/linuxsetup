@@ -68,6 +68,7 @@ install gnome-tweak-tool
 install nmap
 install plank
 install chrome-gnome-shell
+install locate 
 
 snap install code --classic
 
