@@ -41,7 +41,7 @@ if test -f "$FILE"; then
 fi
 
 #Set the username to configure
-inuser="AzureUser"
+inuser="azure"
 
 #install oh my zsh
 install curl
