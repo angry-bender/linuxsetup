@@ -1,7 +1,5 @@
 #!/bin/bash
-
-
-#function to install apps with a clean display
+#function to install apps with a clean log output
 function retryinstall
 {
    echo -e "[\033[33m-\e[0m] Retrying..."
@@ -15,16 +13,21 @@ function install
    DEBIAN_FRONTEND=noninteractive apt-get install -yq -o  Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" $1 >/dev/null 2>/dev/null && echo -e "[\033[32m*\e[0m]OK" || retryinstall $1
 }
 
+scriptdir=$(pwd)
+
+# #format disk
+parted /dev/sdc --script mklabel gpt mkpart extpart ext4 0% 100%
+sleep 1
+mkfs -t ext4 -L rootfs /dev/sdc1
+mkdir /mnt/datadrive && sudo mount /dev/sdc1 /mnt/datadrive
+
+#I then need to figre out how to add this uuid to fstab for when the VM is rebooted
+uuid="$(blkid /dev/sdc1 | awk '{print $3}' | sed s/\"//g)"
+echo "$uuid"
+echo "$uuid /mnt/datadrive ext4 defaults,nofail   1 2" >> /etc/fstab
 
 
-##### Main #####
-USERN=drop
-
-#Check Sudo
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run with sudo" 
-   exit 1
-fi
+#Installation options
 
 #Check working directory
 FILE=.zshrc
@@ -34,48 +37,54 @@ if test -f "$FILE"; then
         echo -e "Working Directory Check: [\033[31m-\e[0m] FAILED"
         echo "Please change to the downloaded direectory with file and run directly from there"
         echo "This script will now exit"
-        exit
+        exit 1
 fi
 
-#Get the Standard Users username
-inuser=$SUDO_USER
+#Set the username to configure
+inuser="AzureUser"
 
 #install oh my zsh
 install curl
 install zsh
 echo -e "Installing: Oh my ZSH from external provider [-]"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 0<&-
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 echo -e "Oh my ZSH installation: [\033[33m-\e[0m] Check after logon"
 
 #ensure shell changed
 usermod -s /usr/bin/zsh ${inuser}
+usermod -s /usr/bin/zsh root
 echo -e "${inuser} shell: changed to zsh [\033[32m*\e[0m]OK"
+
+#Update package lists
+sudo apt update
 
 #Install Applications
 install vim
 install git
 install powerline
-install locate
-install open-vm-tools
+install mlocate
 
 #copy files to correct directories
-cp rssh.conf /etc/rssh.conf
 cp .vimrc /home/${inuser}/
+cp .vimrc /root/
 chown $inuser:$inuser /home/$inuser/.vimrc
+chown root:root /root/.vimrc
 cp .zshrc /home/${inuser}/
+cp .zshrc /root/
 chown $inuser:$inuser /home/$inuser/.zshrc
+chown root:root /root/.zshrc
 echo -e "Copy Config Files: [\033[32m*\e[0m]OK"
+cp -r ./~/.oh-my-zsh /root/
+chown -R root:root /root/.oh-my-zsh
 cp -r ~/.oh-my-zsh /home/${inuser}/
 chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
 
-#remove my username with set username
-sed -i -e "s/setupuser/"${inuser}"/g" /home/"${inuser}"/zshrc
-sed -i -e "s/root/"${inuser}"/g" /home/"${inuser}"/.zshrc
-sed -i -e "s/user/"${inuser}"/g" /home/"${inuser}"/.zshrc
 
-echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
+#remove .zshrc username with set username
+sed -i -e "s/user/"${inuser}"/g" /home/"${inuser}"/.zshrc
+sed -i -e "s/\/home\/user/\/root\//g" /root/.zshrc
 
 git restore .zshrc >/dev/null 2>/dev/nul
