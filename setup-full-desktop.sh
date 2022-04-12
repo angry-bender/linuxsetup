@@ -87,6 +87,7 @@ chown $inuser:$inuser /home/$inuser/.zshrc
 echo -e "Copy Config Files: [\033[32m*\e[0m]OK"
 cp -r ~/.oh-my-zsh /home/${inuser}/
 chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
+cp agnoster.zsh.theme /home/$inuser/.oh-my-zsh/themes/agnoster.zsh-theme
 
 #remove my username with set username
 sed -i -e "s/setupuser/"${inuser}"/g" /home/"${inuser}"/zshrc
