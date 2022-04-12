@@ -81,6 +81,7 @@ cp -r ./~/.oh-my-zsh /root/
 chown -R root:root /root/.oh-my-zsh
 cp -r ~/.oh-my-zsh /home/${inuser}/
 chown -R $inuser:$inuser /home/$inuser/.oh-my-zsh
+cp agnoster.zsh.theme /home/$inuser/.oh-my-zsh/themes/agnoster.zsh-theme
 
 
 #remove .zshrc username with set username
