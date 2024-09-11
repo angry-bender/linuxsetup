@@ -63,6 +63,8 @@ install fortune
 install terminator
 install snap
 install locate
+install vim-airline 
+install vim-airline-themes  
 
 snap install code --classic
 
