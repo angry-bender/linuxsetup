@@ -47,8 +47,6 @@ echo -e "Installing: Oh my ZSH from external provider [-]"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" 0<&-
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-install vim-airline 
-install vim-airline-themes  
 echo -e "Oh my ZSH installation: [\033[33m-\e[0m] Check after logon"
 
 #ensure shell changed
@@ -57,6 +55,8 @@ echo -e "${inuser} shell: changed to zsh [\033[32m*\e[0m]OK"
 
 #Install Applications
 install vim
+install vim-airline 
+install vim-airline-themes  
 install git
 install powerline
 install locate
