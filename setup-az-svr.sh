@@ -66,6 +66,8 @@ install vim
 install git
 install powerline
 install mlocate
+install vim-airline 
+install vim-airline-themes  
 
 #copy files to correct directories
 cp .vimrc /home/${inuser}/
