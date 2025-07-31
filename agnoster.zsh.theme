@@ -210,8 +210,9 @@ prompt_dir() {
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$VIRTUAL_ENV_DISABLE_PROMPT" ]]; then
-    prompt_segment blue black "(${VIRTUAL_ENV:t:gs/%/%%})"
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    local venv_name=$(basename "$VIRTUAL_ENV")
+    prompt_segment magenta white "🧪 $venv_name (type 'deactivate')"
   fi
 }
 
@@ -243,7 +244,7 @@ prompt_aws() {
 }
 
 prompt_timestamp() {
-  prompt_segment green white 'Current UTC %*'
+  prompt_segment green white 'Current Time %*'
 }
 
 ## Main prompt
