@@ -16,7 +16,7 @@ VENVWRAPPER_SCRIPT="/usr/local/bin/virtualenvwrapper.sh"
 
 echo "📁 Creating virtualenvs directory at $WORKON_HOME..."
 sudo mkdir -p "$WORKON_HOME"
-sudo chmod 775 "$WORKON_HOME"
+sudo chmod 777 "$WORKON_HOME"
 
 echo "💾 Updating ~/.zshrc to enable virtualenvwrapper..."
 
