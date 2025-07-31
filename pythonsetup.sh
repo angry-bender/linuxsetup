@@ -28,6 +28,7 @@ if ! grep -q "$VENVWRAPPER_SCRIPT" ~/.zshrc; then
 export WORKON_HOME=$WORKON_HOME
 export VIRTUALENVWRAPPER_PYTHON=$VENVWRAPPER_PYTHON
 source $VENVWRAPPER_SCRIPT
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 EOL
   echo "✅ .zshrc updated!"
 else
