@@ -40,6 +40,9 @@ fi
 #Get the Standard Users username
 inuser=$SUDO_USER
 
+# Do updates so the rest works
+apt update
+
 #install oh my zsh
 install curl
 install zsh
