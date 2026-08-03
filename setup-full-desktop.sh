@@ -60,7 +60,7 @@ install git
 install powerline
 install cowsay
 install fortune
-install terminator
+install tilix
 install snap
 install wireshark
 install gnome-tweak-tool
