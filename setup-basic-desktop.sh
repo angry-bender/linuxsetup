@@ -63,7 +63,7 @@ install git
 install powerline
 install cowsay
 install fortune
-install terminator
+install tilix
 install snap
 install locate
 install vim-airline 
