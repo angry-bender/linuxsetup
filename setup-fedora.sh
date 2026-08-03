@@ -58,6 +58,14 @@ install vim-enhanced
 # Note: vim-airline is not in F43 yet
 install powerline
 
+#install gnome customisation, to either dash to dock, or dash to panel
+#Note (post login behavior, disable overview on startup too)
+install gnome-extensions-app
+install gnome-shell-extension-dash-to-panel
+install gnome-shell-extension-dash-to-dock
+
+
+
 # Copy files
 # Ensure rssh is installed if you rely on that config, though it's deprecated in Fedora
 [ -f rssh.conf ] && cp rssh.conf /etc/rssh.conf 
@@ -80,7 +88,10 @@ sed -i -e "s/setupuser/"${inuser}"/g" /home/"${inuser}"/.zshrc
 sed -i -e "s/root/"${inuser}"/g" /home/"${inuser}"/.zshrc
 sed -i -e "s/user/"${inuser}"/g" /home/"${inuser}"/.zshrc
 
-echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
 
 # Cleanup
 git restore .zshrc >/dev/null 2>/dev/null
+
+echo -e "[\033[32m*Setup Complete*\e[0m]: Please log out and back in"
+gnome-session-quit
+
