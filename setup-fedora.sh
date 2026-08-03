@@ -61,6 +61,7 @@ install powerline
 #install gnome customisation, to either dash to dock, or dash to panel
 #Note (post login behavior, disable overview on startup too)
 install gnome-extensions-app
+install gnome-tweaks
 install gnome-shell-extension-dash-to-panel
 install gnome-shell-extension-dash-to-dock
 gsettings set org.gnome.desktop.interface gtk-decoration-layout "appmenu:minimize,maximize,close"
