@@ -63,6 +63,7 @@ install powerline
 install gnome-extensions-app
 install gnome-shell-extension-dash-to-panel
 install gnome-shell-extension-dash-to-dock
+gsettings set org.gnome.desktop.interface gtk-decoration-layout "appmenu:minimize,maximize,close"
 
 
 
